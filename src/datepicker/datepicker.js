@@ -391,7 +391,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.position'])
                     // Outter change
                     ngModel.$render = function () {
                         var date = ngModel.$viewValue ? dateFilter(ngModel.$viewValue, dateFormat) : '';
-                        if (typeof(+ngModel.$modelValue) !== 'string' && !+ngModel.$modelValue) {
+                        if (typeof(+ngModel.$modelValue) !== 'string' && !(+ngModel.$modelValue)) {
                             date = 'Now';
                         }
                         element.val(date);

@@ -290,7 +290,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', 'Create bootstrap build files', function () {
         var _ = grunt.util._;
-
         //If arguments define what modules to build, build those. Else, everything
         if (this.args.length) {
             this.args.forEach(findModule);
@@ -333,6 +332,11 @@ module.exports = function (grunt) {
             .concat(srcFiles).concat(tpljsFiles));
 
         grunt.task.run(['concat', 'uglify']);
+    });
+
+
+    grunt.registerTask('buildCustom', function () {
+        grunt.task.run('build:datepicker:dropdownToggle');
     });
 
     grunt.registerTask('test', 'Run tests on singleRun karma server', function () {
