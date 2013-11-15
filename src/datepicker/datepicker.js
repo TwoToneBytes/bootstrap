@@ -265,7 +265,8 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.position'])
         clearText: 'Clear',
         closeText: 'Done',
         closeOnDateSelection: true,
-        appendToBody: false
+        appendToBody: false,
+        showWeeksButton: true
     })
 
     .directive('datepickerPopup', ['$compile', '$parse', '$document', '$position', 'dateFilter', 'datepickerPopupConfig', 'datepickerConfig',
@@ -288,6 +289,11 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.position'])
 
                     originalScope.$on('$destroy', function () {
                         scope.$destroy();
+                    });
+
+
+                    attrs.$observe('showWeeksButton', function (show) {
+                        scope.showWeeksButton = angular.isDefined(show) ? show : datepickerPopupConfig.showWeeksButton;
                     });
 
                     attrs.$observe('currentText', function (text) {
@@ -391,7 +397,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.position'])
                     // Outter change
                     ngModel.$render = function () {
                         var date = ngModel.$viewValue ? dateFilter(ngModel.$viewValue, dateFormat) : '';
-                        if (typeof(+ngModel.$modelValue) !== 'string' && !(+ngModel.$modelValue)) {
+                        if (typeof(+ngModel.$modelValue) !== 'string' && +ngModel.$modelValue === 0) {
                             date = 'Now';
                         }
                         element.val(date);

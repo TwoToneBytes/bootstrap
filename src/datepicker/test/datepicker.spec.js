@@ -1198,6 +1198,16 @@ describe('datepicker directive', function () {
                     expect(buttons.eq(3).text()).toBe('CloseME');
                 });
             });
+
+            describe('attr `hide-weeks-button`', function () {
+                it('should hide the weeks button', function () {
+                    var wrapElement = $compile('<div><input ng-model="date" datepicker-popup show-weeks-button="false"><div>')($rootScope);
+                    $rootScope.$digest();
+                    assignElements(wrapElement);
+                    assignButtons();
+                    expect(buttons.eq(1).is(':visible')).toBeFalsy();
+                });
+            });
         });
 
         describe('use with `ng-required` directive', function () {
